@@ -1,0 +1,25 @@
+# Env / secrets
+.env
+.env.*
+*.jks
+*.keystore
+
+# Flutter
+mobile_app/build/
+mobile_app/.dart_tool/
+wearable_app/build/
+wearable_app/.dart_tool/
+**/android/local.properties
+**/*.iml
+
+# Node
+mock_api/node_modules/
+mock_api/.env
+
+# PWA
+pwa_tv/node_modules/
+pwa_tv/dist/
+
+# OS
+.DS_Store
+Thumbs.db
