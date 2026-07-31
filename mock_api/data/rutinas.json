@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "Fuerza Tren Superior",
+    "duracionMin": 45,
+    "caloriasEstimadas": 380,
+    "nivel": "Intermedio",
+    "video": "fuerza-superior.mp4",
+    "imagen": "fuerza-superior.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Cardio HIIT",
+    "duracionMin": 30,
+    "caloriasEstimadas": 420,
+    "nivel": "Avanzado",
+    "video": "cardio-hiit.mp4",
+    "imagen": "cardio-hiit.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Yoga y Movilidad",
+    "duracionMin": 40,
+    "caloriasEstimadas": 180,
+    "nivel": "Principiante",
+    "video": "yoga-movilidad.mp4",
+    "imagen": "yoga-movilidad.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Piernas y Glúteo",
+    "duracionMin": 50,
+    "caloriasEstimadas": 400,
+    "nivel": "Intermedio",
+    "video": "piernas-gluteo.mp4",
+    "imagen": "piernas-gluteo.jpg"
+  }
+]
