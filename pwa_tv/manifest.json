@@ -1,0 +1,10 @@
+{
+  "name": "StarFit TV",
+  "short_name": "StarFit",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "background_color": "#0a0a0a",
+  "theme_color": "#ff6b00",
+  "orientation": "landscape",
+  "icons": []
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarFit TV</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>StarFit — TV</h1>
+    </header>
+
+    <div class="offline-banner" id="offline-banner">
+      Sin conexión al servidor. Mostrando la última información disponible.
+    </div>
+
+    <main class="rutinas-grid" id="rutinas-grid"></main>
+
+    <aside class="actividad-panel">
+      <h3>Actividad en vivo</h3>
+      <div class="bpm-value" id="bpm-value">--</div>
+      <div class="bpm-label">BPM</div>
+      <div class="stat-row" id="pasos-value">0 pasos</div>
+      <div class="stat-row" id="calorias-value">0 kcal quemadas</div>
+    </aside>
+  </div>
+
+  <script src="./js/app.js"></script>
+</body>
+</html>

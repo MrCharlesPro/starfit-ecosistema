@@ -14,10 +14,8 @@ class WearableApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'StarFit Wearable',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-        brightness: Brightness.dark,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(brightness: Brightness.dark),
       home: const WearableScreen(),
     );
   }
@@ -41,9 +39,7 @@ class _WearableScreenState extends State<WearableScreen> {
   Timer? _timer;
 
   void _toggleActividad() {
-    setState(() {
-      _activo = !_activo;
-    });
+    setState(() => _activo = !_activo);
 
     if (_activo) {
       _timer = Timer.periodic(const Duration(seconds: 2), (_) {
@@ -52,11 +48,7 @@ class _WearableScreenState extends State<WearableScreen> {
           _bpm = 90 + _random.nextInt(40);
           _calorias = (_pasos * 0.04).round();
         });
-        _service.enviarActividad(
-          pasos: _pasos,
-          bpm: _bpm,
-          caloriasQuemadas: _calorias,
-        );
+        _service.enviarActividad(pasos: _pasos, bpm: _bpm, caloriasQuemadas: _calorias);
       });
     } else {
       _timer?.cancel();
@@ -73,31 +65,49 @@ class _WearableScreenState extends State<WearableScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF111111),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('StarFit', style: TextStyle(color: Colors.orange, fontSize: 20)),
-            const SizedBox(height: 20),
-            Text('$_bpm', style: const TextStyle(color: Colors.redAccent, fontSize: 48, fontWeight: FontWeight.bold)),
-            const Text('BPM', style: TextStyle(color: Colors.white54)),
-            const SizedBox(height: 20),
-            Text('$_pasos pasos', style: const TextStyle(color: Colors.white, fontSize: 18)),
-            Text('$_calorias kcal', style: const TextStyle(color: Colors.white70)),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: _toggleActividad,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: _activo ? Colors.red : Colors.green,
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(24),
+        child: Container(
+          width: 340,
+          height: 340,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black,
+            border: Border.all(color: const Color(0xFF2A2A2A), width: 10),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.6), blurRadius: 20, spreadRadius: 4),
+            ],
+          ),
+          child: ClipOval(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('StarFit', style: TextStyle(color: Colors.orange, fontSize: 16, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Text('$_bpm', style: const TextStyle(color: Colors.redAccent, fontSize: 40, fontWeight: FontWeight.bold)),
+                  const Text('BPM', style: TextStyle(color: Colors.white38, fontSize: 10)),
+                  const SizedBox(height: 10),
+                  Text('$_pasos pasos', style: const TextStyle(color: Colors.white, fontSize: 14)),
+                  Text('$_calorias kcal', style: const TextStyle(color: Colors.white54, fontSize: 12)),
+                  const SizedBox(height: 14),
+                  GestureDetector(
+                    onTap: _toggleActividad,
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: _activo ? Colors.red : Colors.green,
+                      ),
+                      child: Icon(_activo ? Icons.stop : Icons.play_arrow, color: Colors.white, size: 22),
+                    ),
+                  ),
+                ],
               ),
-              child: Icon(_activo ? Icons.stop : Icons.play_arrow, size: 32),
             ),
-            const SizedBox(height: 12),
-            Text(_activo ? 'Detener actividad' : 'Iniciar actividad', style: const TextStyle(color: Colors.white54)),
-          ],
+          ),
         ),
       ),
     );
