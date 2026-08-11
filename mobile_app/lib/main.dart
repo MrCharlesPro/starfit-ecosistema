@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'services/rutina_service.dart';
 import 'models/rutina.dart';
+import 'screens_actividad.dart';
 
 void main() {
   runApp(const StarFitApp());
@@ -14,7 +15,34 @@ class StarFitApp extends StatelessWidget {
     return MaterialApp(
       title: 'StarFit',
       theme: ThemeData(primarySwatch: Colors.deepOrange),
-      home: const RutinasScreen(),
+      home: const HomeNav(),
+    );
+  }
+}
+
+class HomeNav extends StatefulWidget {
+  const HomeNav({super.key});
+
+  @override
+  State<HomeNav> createState() => _HomeNavState();
+}
+
+class _HomeNavState extends State<HomeNav> {
+  int _index = 0;
+  final _screens = const [RutinasScreen(), ActividadScreen()];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_index],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _index,
+        onTap: (i) => setState(() => _index = i),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'Rutinas'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Actividad'),
+        ],
+      ),
     );
   }
 }
