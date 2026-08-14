@@ -1,0 +1,39 @@
+<section class="products">
+  <header class="products__header">
+    <h1>Catálogo de productos</h1>
+    <p>Encuentra el equipo y los complementos ideales para tu entrenamiento</p>
+  </header>
+
+  <div class="products__search">
+    <input
+      type="text"
+      class="products__search-input"
+      placeholder="Buscar por nombre o categoría..."
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+    />
+  </div>
+
+  <div class="products__grid" *ngIf="products().length && !loadError()">
+    <div class="product-card" *ngFor="let product of products()">
+      <button
+        type="button"
+        class="product-card__wishlist"
+        [class.is-active]="estaEnWishlist(product.id)"
+        (click)="toggleWishlist(product)"
+        aria-label="Agregar a lista de deseos"
+      >
+        {{ estaEnWishlist(product.id) ? '❤️' : '🤍' }}
+      </button>
+      <img class="product-card__imagen" [src]="product.imageUrl || 'https://placehold.co/300x200?text=StarFit'" [alt]="product.name" />
+      <div class="product-card__body">
+        <span class="product-card__categoria">{{ product.category }}</span>
+        <h3 class="product-card__nombre">{{ product.name }}</h3>
+        <p class="product-card__precio">${{ product.price }}</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="products__empty" *ngIf="!products().length && !loadError()">No se encontraron productos.</p>
+  <p class="products__offline" *ngIf="loadError()">📡 Sin conexión con el servidor</p>
+</section>

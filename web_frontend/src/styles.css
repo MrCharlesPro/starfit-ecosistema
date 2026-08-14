@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #1a1a1a;
+}
+
+body {
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+/* Paleta de colores principal */
+:root {
+  --primary-black: #0f0f0f;
+  --dark-gray: #1a1a1a;
+  --light-gray: #f8f9fa;
+  --accent-yellow: #ffd700;
+  --accent-lime: #00ff41;
+  --accent-purple: #6d28d9;
+  --accent-blue: #3b82f6;
+  --text-light: #e0e0e0;
+  --text-muted: #999999;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+/* Remover márgenes por defecto de html y body */
+app-root {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

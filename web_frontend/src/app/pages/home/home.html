@@ -1,0 +1,82 @@
+<div class="home">
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Transforma tu cuerpo</h1>
+      <p class="hero__subtitle">Eleva tu mente. Alcanza tu mejor versión con StarFit</p>
+      <p class="hero__description">Únete a miles de miembros que ya están transformando sus vidas con nuestros programas personalizados, entrenadores expertos y comunidad motivadora.</p>
+      <div class="hero__actions">
+        <a routerLink="/register" class="btn btn--primary">Empieza tu transformación</a>
+        <a routerLink="/login" class="btn btn--outline">Ya tengo cuenta</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features__header">
+      <h2>¿Por qué elegir StarFit?</h2>
+      <p>Somos más que un gimnasio. Somos tu aliado en la transformación.</p>
+    </div>
+    <div class="features__grid">
+      <div class="feature-card" *ngFor="let f of features">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path [attr.d]="getFeatureIcon(f.icon)"/>
+          </svg>
+        </div>
+        <h3 class="feature-card__title">{{ f.title }}</h3>
+        <p class="feature-card__text">{{ f.text }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat-item">
+      <h3 class="stat-item__number">+15K</h3>
+      <p class="stat-item__label">Miembros activos</p>
+    </div>
+    <div class="stat-item">
+      <h3 class="stat-item__number">50+</h3>
+      <p class="stat-item__label">Clases semanales</p>
+    </div>
+    <div class="stat-item">
+      <h3 class="stat-item__number">24/7</h3>
+      <p class="stat-item__label">Disponibilidad</p>
+    </div>
+    <div class="stat-item">
+      <h3 class="stat-item__number">98%</h3>
+      <p class="stat-item__label">Satisfacción</p>
+    </div>
+  </section>
+
+  <section class="plans">
+    <div class="plans__header">
+      <h2>Elige el plan perfecto para ti</h2>
+      <p>Todos nuestros planes incluyen acceso a la comunidad StarFit y a nuestros recursos en línea.</p>
+    </div>
+    <div class="plans__grid">
+      <div class="plan-card" *ngFor="let plan of plans" [class.plan-card--highlighted]="plan.highlighted">
+        <div class="plan-card__header">
+          <h3 class="plan-card__name">{{ plan.name }}</h3>
+          <p class="plan-card__price">${{ plan.price }}<span>/mes</span></p>
+        </div>
+        <ul class="plan-card__features">
+          <li *ngFor="let feature of plan.features">
+            <span class="plan-card__checkmark">✓</span>
+            {{ feature }}
+          </li>
+        </ul>
+        <a routerLink="/register" class="btn" [ngClass]="plan.highlighted ? 'btn--primary' : 'btn--secondary'">
+          Elegir plan
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta__content">
+      <h2>¿Listo para comenzar?</h2>
+      <p>Únete a StarFit hoy y obtén tu primera evaluación física <span class="cta__highlight">completamente gratis</span></p>
+      <a routerLink="/register" class="btn btn--primary btn--large">Registrarse ahora</a>
+    </div>
+  </section>
+</div>

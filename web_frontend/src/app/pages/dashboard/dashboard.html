@@ -1,0 +1,125 @@
+<section class="dashboard">
+  <header class="dashboard__header">
+    <h1>Hola, {{ userName }} 👨‍💼</h1>
+    <p>Este es tu resumen de progreso en StarFit</p>
+  </header>
+
+  <div class="dashboard__stats">
+    <div class="stat-card" *ngFor="let stat of stats">
+      <div class="stat-card__icon">{{ stat.icon }}</div>
+      <div>
+        <p class="stat-card__value">{{ stat.value }}</p>
+        <p class="stat-card__label">{{ stat.label }}</p>
+      </div>
+    </div>
+  </div>
+
+  <app-actividad-widget />
+
+  <div class="dashboard__plans">
+    <h2>Mi plan de membresía</h2>
+
+    <div class="plan-actual" *ngIf="planActual() as plan">
+      <p class="plan-actual__nombre">Plan {{ plan.planName }} <span class="plan-actual__precio">${{ plan.price }}/mes</span></p>
+      <p class="plan-actual__detalle">Tarjeta terminación {{ plan.cardLast4 }} · activado el {{ plan.paidAt | date: 'dd/MM/yyyy' }}</p>
+    </div>
+    <p class="plan-actual__vacio" *ngIf="!planActual()">Aún no tienes un plan activo. Elige uno abajo.</p>
+
+    <div class="dashboard-plans__grid">
+      <div class="dashboard-plan-card" *ngFor="let plan of planes" [class.is-current]="esPlanActual(plan.id)">
+        <h3 class="dashboard-plan-card__nombre">{{ plan.name }}</h3>
+        <p class="dashboard-plan-card__precio">${{ plan.price }}<span>/mes</span></p>
+        <ul class="dashboard-plan-card__features">
+          <li *ngFor="let feature of plan.features">✓ {{ feature }}</li>
+        </ul>
+        <button
+          type="button"
+          class="btn-plan"
+          [disabled]="esPlanActual(plan.id)"
+          (click)="elegirPlan(plan)"
+        >
+          {{ esPlanActual(plan.id) ? 'Plan activo' : 'Elegir plan' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="payment-overlay" *ngIf="mostrarFormularioPago()">
+      <div class="payment-card">
+        <ng-container *ngIf="!pagoExitoso(); else pagoOk">
+          <h3>Confirmar pago — Plan {{ planEnProceso()?.name }} (${{ planEnProceso()?.price }}/mes)</h3>
+          <p class="payment-card__nota">Pago simulado, no se procesa ningún cargo real.</p>
+
+          <form [formGroup]="pagoForm" (ngSubmit)="confirmarPago()" class="payment-form">
+            <div class="form-group">
+              <label for="cardName">Nombre en la tarjeta</label>
+              <input id="cardName" type="text" formControlName="cardName" placeholder="Como aparece en la tarjeta" />
+              <span class="form-error" *ngIf="pagoForm.get('cardName')?.invalid && pagoForm.get('cardName')?.touched">
+                Ingresa el nombre del titular.
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="cardNumber">Número de tarjeta</label>
+              <input id="cardNumber" type="text" formControlName="cardNumber" placeholder="16 dígitos" maxlength="16" />
+              <span class="form-error" *ngIf="pagoForm.get('cardNumber')?.invalid && pagoForm.get('cardNumber')?.touched">
+                Ingresa 16 dígitos.
+              </span>
+            </div>
+
+            <div class="payment-form__row">
+              <div class="form-group">
+                <label for="expiry">Vencimiento</label>
+                <input id="expiry" type="text" formControlName="expiry" placeholder="MM/AA" maxlength="5" />
+                <span class="form-error" *ngIf="pagoForm.get('expiry')?.invalid && pagoForm.get('expiry')?.touched">
+                  Formato MM/AA.
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input id="cvv" type="text" formControlName="cvv" placeholder="123" maxlength="4" />
+                <span class="form-error" *ngIf="pagoForm.get('cvv')?.invalid && pagoForm.get('cvv')?.touched">
+                  3 o 4 dígitos.
+                </span>
+              </div>
+            </div>
+
+            <div class="payment-form__actions">
+              <button type="button" class="btn-plan btn-plan--outline" (click)="cancelarPago()">Cancelar</button>
+              <button type="submit" class="btn-plan">Pagar y activar</button>
+            </div>
+          </form>
+        </ng-container>
+
+        <ng-template #pagoOk>
+          <div class="payment-success">
+            <p>✅ ¡Pago simulado exitoso!</p>
+            <p>Tu plan {{ planActual()?.planName }} ya está activo.</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard__activity">
+    <h2>Actividad reciente</h2>
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Actividad</th>
+          <th>Duración</th>
+          <th>Calorías</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of activityLog">
+          <td>{{ log.date }}</td>
+          <td>{{ log.activity }}</td>
+          <td>{{ log.duration }}</td>
+          <td>{{ log.calories }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+<section class="wishlist">
+  <header class="wishlist__header">
+    <h1>Mi lista de deseos</h1>
+    <p>Productos que has guardado para más tarde</p>
+  </header>
+
+  <div class="wishlist__grid" *ngIf="products().length && !loadError()">
+    <div class="wishlist-card" *ngFor="let product of products()">
+      <img class="wishlist-card__imagen" [src]="product.imageUrl || 'https://placehold.co/300x200?text=StarFit'" [alt]="product.name" />
+      <div class="wishlist-card__body">
+        <span class="wishlist-card__categoria">{{ product.category }}</span>
+        <h3 class="wishlist-card__nombre">{{ product.name }}</h3>
+        <p class="wishlist-card__precio">${{ product.price }}</p>
+        <button type="button" class="wishlist-card__quitar" (click)="quitar(product)">Quitar de mi lista</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="wishlist__empty" *ngIf="!products().length && !loadError()">Aún no has guardado productos.</p>
+  <p class="wishlist__offline" *ngIf="loadError()">📡 Sin conexión con el servidor</p>
+</section>

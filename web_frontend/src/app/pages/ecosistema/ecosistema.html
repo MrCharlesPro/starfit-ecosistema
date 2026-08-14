@@ -1,0 +1,28 @@
+<section class="ecosistema">
+  <header class="ecosistema__header">
+    <h1>Ecosistema StarFit</h1>
+    <p>Tu wearable y tus rutinas, sincronizados en un solo lugar</p>
+  </header>
+
+  <app-actividad-widget />
+
+  <div class="ecosistema__rutinas">
+    <h2>Rutinas disponibles</h2>
+
+    <div class="rutinas__grid" *ngIf="rutinas().length && !rutinasError()">
+      <div class="rutina-card" *ngFor="let rutina of rutinas()">
+        <div class="rutina-card__icono">{{ iconoRutina(rutina.nombre) }}</div>
+        <div class="rutina-card__body">
+          <div class="rutina-card__top">
+            <h3 class="rutina-card__titulo">{{ rutina.nombre }}</h3>
+            <span class="rutina-card__nivel">{{ rutina.nivel }}</span>
+          </div>
+          <p class="rutina-card__detalle">⏱ {{ rutina.duracionMin }} min &nbsp;·&nbsp; 🔥 {{ rutina.caloriasEstimadas }} kcal</p>
+          <a [href]="rutina.video" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Ver video</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="ecosistema__offline" *ngIf="rutinasError()">📡 Sin conexión con el dispositivo</p>
+  </div>
+</section>
