@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://starfit-ecosistema.onrender.com/api'
+  apiUrl: 'https://starfit-ecosistema.onrender.com/api',
+  mockApiUrl: 'http://localhost:3000/api'
 };
