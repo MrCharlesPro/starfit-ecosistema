@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface Rutina {
   id: number;
@@ -23,7 +24,7 @@ export interface ActividadActual {
   providedIn: 'root'
 })
 export class EcosistemaService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.mockApiUrl;
 
   constructor(private http: HttpClient) {}
 

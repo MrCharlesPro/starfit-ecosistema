@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import Fuse from 'fuse.js';
+import { environment } from '../../../environments/environment';
 
 export interface Product {
   id: number;
@@ -18,7 +19,7 @@ export interface Product {
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8081/api/products';
+  private apiUrl = `${environment.apiUrl}/products`;
   private allProducts: Product[] = [];
   private fuseIndex: Fuse<Product> | null = null;
 
